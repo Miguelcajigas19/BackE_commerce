@@ -1,0 +1,93 @@
+services:
+  webserver:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - productos_api
+      - ordenes_api
+      - usuarios_api
+    networks:
+      - dev_network
+
+  productos_api:
+    build:
+      context: ./APIS
+      dockerfile: Dockerfile.productos
+    ports:
+      - "3100:3100"
+    environment:
+      - DATABASE_URL=postgresql://postgres:12345@db_dev:5432/postgres?schema=productos
+    volumes:
+      - ./APIS/productos:/productos/productosAPI
+    networks:
+      - dev_network
+
+  ordenes_api:
+    build:
+      context: ./APIS
+      dockerfile: Dockerfile.ordenes
+    ports:
+      - "3300:3300"
+    environment:
+      - DATABASE_URL=postgresql://postgres:12345@db_dev:5432/postgres?schema=ordenes
+    volumes:
+      - ./APIS/ordenes:/ordenes/ordenesAPI
+    networks:
+      - dev_network
+
+  usuarios_api:
+    build:
+      context: ./APIS
+      dockerfile: Dockerfile.usuarios
+    ports:
+      - "3400:3400"
+    environment:
+      - DATABASE_URL=postgresql://postgres:12345@db_dev:5432/postgres?schema=usuarios
+    volumes:
+      - ./APIS/usuarios:/usuarios/usuariosAPI
+    networks:
+      - dev_network
+
+  db_dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres_audit
+    container_name: productos_db_dev
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 4GB
+        reservations:
+          cpus: "0.1"
+          memory: 1GB
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 12345
+    volumes:
+      - infraestructura_productos_db_data:/var/lib/postgresql/data
+      - ./pg_logs:/var/log/postgresql
+      - ./postgresql_configs/postgresql.conf:/etc/postgresql/postgresql.conf
+    networks:
+      - dev_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: dev_pgadmin
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: luis@miguel.com
+      PGADMIN_DEFAULT_PASSWORD: 12345
+    networks:
+      - dev_network
+
+networks:
+  dev_network:
+    driver: bridge
+
+volumes:
+  infraestructura_productos_db_data:
+    driver: local

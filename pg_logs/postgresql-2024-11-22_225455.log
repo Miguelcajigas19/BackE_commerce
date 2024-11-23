@@ -1,0 +1,22 @@
+2024-11-22 22:54:55.841 GMT [1] LOG:  starting PostgreSQL 17.1 (Debian 17.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2024-11-22 22:54:55.842 GMT [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2024-11-22 22:54:55.842 GMT [1] LOG:  listening on IPv6 address "::", port 5432
+2024-11-22 22:54:55.849 GMT [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2024-11-22 22:54:55.860 GMT [32] LOG:  database system was shut down at 2024-11-22 22:52:40 GMT
+2024-11-22 22:54:55.936 GMT [1] LOG:  database system is ready to accept connections
+2024-11-22 22:55:06.544 GMT [36] LOG:  duration: 6.409 ms  parse s0: SELECT "productos"."Alimento"."id", "productos"."Alimento"."nombre", "productos"."Alimento"."productos" FROM "productos"."Alimento" WHERE 1=1 OFFSET $1
+2024-11-22 22:55:06.548 GMT [36] LOG:  AUDIT: SESSION,1,1,READ,SELECT,,,"SELECT ""productos"".""Alimento"".""id"", ""productos"".""Alimento"".""nombre"", ""productos"".""Alimento"".""productos"" FROM ""productos"".""Alimento"" WHERE 1=1 OFFSET $1",<not logged>
+2024-11-22 22:55:06.549 GMT [36] LOG:  duration: 4.671 ms  bind s0: SELECT "productos"."Alimento"."id", "productos"."Alimento"."nombre", "productos"."Alimento"."productos" FROM "productos"."Alimento" WHERE 1=1 OFFSET $1
+2024-11-22 22:55:06.549 GMT [36] DETAIL:  Parameters: $1 = '0'
+2024-11-22 22:55:06.549 GMT [36] LOG:  execute s0: SELECT "productos"."Alimento"."id", "productos"."Alimento"."nombre", "productos"."Alimento"."productos" FROM "productos"."Alimento" WHERE 1=1 OFFSET $1
+2024-11-22 22:55:06.549 GMT [36] DETAIL:  Parameters: $1 = '0'
+2024-11-22 22:55:06.549 GMT [36] LOG:  duration: 0.428 ms
+2024-11-22 23:18:24.087 GMT [30] LOG:  checkpoint starting: time
+2024-11-22 23:18:24.146 GMT [30] LOG:  checkpoint complete: wrote 3 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.012 s, sync=0.005 s, total=0.059 s; sync files=2, longest=0.003 s, average=0.003 s; distance=0 kB, estimate=0 kB; lsn=0/9DE2430, redo lsn=0/9DE23D8
+2024-11-22 23:19:02.833 GMT [1] LOG:  received fast shutdown request
+2024-11-22 23:19:02.836 GMT [1] LOG:  aborting any active transactions
+2024-11-22 23:19:02.846 GMT [1] LOG:  background worker "logical replication launcher" (PID 35) exited with exit code 1
+2024-11-22 23:19:02.891 GMT [30] LOG:  shutting down
+2024-11-22 23:19:02.895 GMT [30] LOG:  checkpoint starting: shutdown immediate
+2024-11-22 23:19:02.940 GMT [30] LOG:  checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.001 s, sync=0.001 s, total=0.049 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=0 kB; lsn=0/9DE24E0, redo lsn=0/9DE24E0
+2024-11-22 23:19:02.946 GMT [1] LOG:  database system is shut down
